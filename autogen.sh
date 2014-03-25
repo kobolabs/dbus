@@ -23,6 +23,8 @@ DIE=0
 
 AUTOMAKE=automake-1.9
 ACLOCAL=aclocal-1.9
+LIBTOOLIZE=libtoolize
+(glibtoolize --version) < /dev/null > /dev/null 2>&1 && LIBTOOLIZE=glibtoolize
 
 ($AUTOMAKE --version) < /dev/null > /dev/null 2>&1 || {
         AUTOMAKE=automake
@@ -37,9 +39,9 @@ ACLOCAL=aclocal-1.9
 	DIE=1
 }
 
-(libtoolize --version) < /dev/null > /dev/null 2>&1 || {
+($LIBTOOLIZE --version) < /dev/null > /dev/null 2>&1 || {
 	echo
-	echo "You must have libtoolize installed to compile $PROJECT."
+	echo "You must have $LIBTOOLIZE installed to compile $PROJECT."
 	echo "Install the libtool package from ftp.gnu.org or a mirror."
 	DIE=1
 }
@@ -58,7 +60,7 @@ if test -z "$*"; then
         echo "to pass any to it, please specify them on the $0 command line."
 fi
 
-libtoolize --copy --force
+$LIBTOOLIZE --copy --force
 
 echo $ACLOCAL $ACLOCAL_FLAGS
 $ACLOCAL $ACLOCAL_FLAGS

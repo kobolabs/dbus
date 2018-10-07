@@ -48,9 +48,9 @@ fi
 }
 
 LIBTOOLIZE=`which libtoolize`
-if ! test -f $LIBTOOLIZE; then
+($LIBTOOLIZE --version) < /dev/null > /dev/null 2>&1 || {
 	LIBTOOLIZE=`which glibtoolize`
-fi
+}
 
 ($LIBTOOLIZE --version) < /dev/null > /dev/null 2>&1 || {
 	echo
